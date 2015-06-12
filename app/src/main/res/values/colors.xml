@@ -1,0 +1,7 @@
+<resources>
+    <color name="facebook">#3c5a99</color>
+    <color name="facebook_pressed">#B33c5a99</color>
+
+    <color name="google">#c94030</color>
+    <color name="google_pressed">#B3c94030</color>
+</resources>

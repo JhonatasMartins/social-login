@@ -1,0 +1,7 @@
+<resources>
+
+    <dimen name="item_margin">8dp</dimen>
+
+    <dimen name="login_button_width">110dp</dimen>
+
+</resources>
