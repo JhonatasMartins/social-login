@@ -17,7 +17,10 @@ import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.ResultCallback;
+import com.google.android.gms.common.api.Status;
 import com.google.android.gms.plus.Plus;
+import com.google.android.gms.plus.model.people.Person;
 
 import java.util.Arrays;
 
@@ -66,7 +69,14 @@ public class LoginActivity extends AppCompatActivity
         super.onStop();
 
         if (googleApiClient.isConnected()){
-            googleApiClient.disconnect();
+            Plus.AccountApi.revokeAccessAndDisconnect(googleApiClient).setResultCallback(
+                    new ResultCallback<Status>() {
+                        @Override
+                        public void onResult(Status status) {
+                            //clear shared preferences info
+                        }
+                    }
+            );
         }
     }
 
@@ -94,7 +104,6 @@ public class LoginActivity extends AppCompatActivity
     public void onSuccess(LoginResult loginResult) {
         //facebook
         //save on shared preferences user is logged with facebook
-
         //TODO: onSuccess
     }
 
@@ -113,13 +122,28 @@ public class LoginActivity extends AppCompatActivity
     @Override
     public void onConnected(Bundle bundle) {
         //google plus
-        //TODO: onConnected
+        Person person = Plus.PeopleApi.getCurrentPerson(googleApiClient);
+
+        if (person != null){
+            Log.e("teste",  " person name "+ person.getDisplayName());
+            if (person.hasCover()){
+                Person.Cover cover = person.getCover();
+
+                if (cover.hasCoverPhoto()){
+                    Log.e("teste", " cover url" + cover.getCoverPhoto().getUrl());
+                }
+            }
+
+            if(person.hasImage()){
+                Log.e("teste", " image url" + person.getImage().getUrl());
+            }
+        }
+
     }
 
     @Override
     public void onConnectionSuspended(int i) {
         //google plus
-        //TODO: onConnectionSuspended
     }
 
     @Override
