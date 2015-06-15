@@ -1,6 +1,7 @@
 package br.com.jhonatasmartins.social;
 
 import android.content.Intent;
+import android.content.IntentSender;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -14,18 +15,24 @@ import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.plus.Plus;
 
 import java.util.Arrays;
 
 
 public class LoginActivity extends AppCompatActivity
-        implements View.OnClickListener, FacebookCallback<LoginResult>{
+        implements View.OnClickListener, FacebookCallback<LoginResult>,
+        GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener{
 
     Button facebookButton;
     Button googleButton;
 
     LoginManager facebookLoginManager;
     CallbackManager facebookCallbackManager;
+    GoogleApiClient googleApiClient;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,10 +46,8 @@ public class LoginActivity extends AppCompatActivity
         facebookButton.setOnClickListener(this);
         googleButton.setOnClickListener(this);
 
-        facebookCallbackManager = CallbackManager.Factory.create();
-        facebookLoginManager = LoginManager.getInstance();
-
-        facebookLoginManager.registerCallback(facebookCallbackManager, this);
+        setupFacebookLogin();
+        setupGoogleLogin();
     }
 
     @Override
@@ -57,6 +62,15 @@ public class LoginActivity extends AppCompatActivity
     }
 
     @Override
+    protected void onStop() {
+        super.onStop();
+
+        if (googleApiClient.isConnected()){
+            googleApiClient.disconnect();
+        }
+    }
+
+    @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         facebookCallbackManager.onActivityResult(requestCode, resultCode, data);
@@ -66,19 +80,75 @@ public class LoginActivity extends AppCompatActivity
     public void onClick(View view) {
 
         if (view.getId() == R.id.login_facebook){
-            facebookLoginManager.logInWithReadPermissions(this, Arrays.asList("public_profile", "email"));
+            facebookLoginManager.logInWithReadPermissions(this,
+                                                          Arrays.asList("public_profile", "email"));
+        }else{
+            if(!googleApiClient.isConnected()){
+                googleApiClient.connect();
+            }
         }
 
     }
 
     @Override
     public void onSuccess(LoginResult loginResult) {
+        //facebook
         //save on shared preferences user is logged with facebook
+
+        //TODO: onSuccess
     }
 
     @Override
-    public void onCancel() {}
+    public void onCancel() {
+        //facebook
+        //TODO: onCancel
+    }
 
     @Override
-    public void onError(FacebookException e) {}
+    public void onError(FacebookException e) {
+        //facebook
+        //TODO: onConnected
+    }
+
+    @Override
+    public void onConnected(Bundle bundle) {
+        //google plus
+        //TODO: onConnected
+    }
+
+    @Override
+    public void onConnectionSuspended(int i) {
+        //google plus
+        //TODO: onConnectionSuspended
+    }
+
+    @Override
+    public void onConnectionFailed(ConnectionResult connectionResult) {
+        //google plus
+        if(connectionResult.hasResolution()){
+            try {
+                startIntentSenderForResult(connectionResult.getResolution().getIntentSender(),
+                        10001, null, 0, 0, 0);
+            }catch (IntentSender.SendIntentException e){
+                Log.e("Social", e.getMessage());
+                googleApiClient.connect();
+            }
+        }
+    }
+
+    private void setupFacebookLogin() {
+        facebookCallbackManager = CallbackManager.Factory.create();
+        facebookLoginManager = LoginManager.getInstance();
+
+        facebookLoginManager.registerCallback(facebookCallbackManager, this);
+    }
+
+    private void setupGoogleLogin() {
+        googleApiClient = new GoogleApiClient.Builder(this)
+                .addConnectionCallbacks(this)
+                .addOnConnectionFailedListener(this)
+                .addApi(Plus.API)
+                .addScope(Plus.SCOPE_PLUS_LOGIN)
+                .build();
+    }
 }

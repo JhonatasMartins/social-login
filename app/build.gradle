@@ -23,6 +23,7 @@ dependencies {
     compile 'com.android.support:design:22.2.0'
 
     compile 'com.facebook.android:facebook-android-sdk:4.1.0'
+    compile 'com.google.android.gms:play-services:6.5.+'
 }
 
 //create app https://developers.facebook.com/quickstarts/501901813305584/?platform=android
