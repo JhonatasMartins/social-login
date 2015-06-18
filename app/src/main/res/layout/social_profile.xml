@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/drawer_header_height">
+
+    <ImageView
+        android:id="@+id/social_cover"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitXY"
+        android:background="@android:color/darker_gray"/>
+
+    <ImageView
+        android:id="@+id/social_photo"
+        android:layout_width="@dimen/drawer_photo_size"
+        android:layout_height="@dimen/drawer_photo_size"
+        android:layout_margin="@dimen/margin" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/drawer_info_height"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="@dimen/margin"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/social_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/item_margin"
+            android:singleLine="true"
+            android:ellipsize="end"
+            android:fontFamily="sans-serif-medium"
+            android:textColor="@android:color/white"/>
+
+        <TextView
+            android:id="@+id/social_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/item_margin"
+            android:singleLine="true"
+            android:ellipsize="end"
+            android:textColor="@android:color/white"/>
+
+        <!--
+            sans-serif-medium == roboto medium
+            sans-serif == roboto regular
+            sans-serif-light == roboto light
+            sans-serif-condensed == roboto condensed
+            sans-serif-thin == roboto thin -->
+
+    </LinearLayout>
+
+</RelativeLayout>

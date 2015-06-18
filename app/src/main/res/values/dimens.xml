@@ -1,7 +1,11 @@
 <resources>
 
+    <dimen name="margin">16dp</dimen>
     <dimen name="item_margin">8dp</dimen>
 
     <dimen name="login_button_width">110dp</dimen>
+    <dimen name="drawer_header_height">200dp</dimen>
+    <dimen name="drawer_photo_size">90dp</dimen>
+    <dimen name="drawer_info_height">56dp</dimen>
 
 </resources>

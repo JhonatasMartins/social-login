@@ -24,11 +24,5 @@ dependencies {
 
     compile 'com.facebook.android:facebook-android-sdk:4.1.0'
     compile 'com.google.android.gms:play-services:6.5.+'
+    compile 'com.squareup.picasso:picasso:2.5.2'
 }
-
-//create app https://developers.facebook.com/quickstarts/501901813305584/?platform=android
-//config project https://developers.facebook.com/docs/android/getting-started
-
-//https://developers.google.com/identity/sign-in/android/start
-//https://developers.google.com/+/mobile/android/getting-started
-//https://developers.google.com/identity/sign-in/android/disconnect

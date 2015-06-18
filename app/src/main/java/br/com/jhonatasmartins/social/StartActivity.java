@@ -1,7 +1,9 @@
 package br.com.jhonatasmartins.social;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 
 /**
@@ -9,20 +11,23 @@ import android.support.v7.app.AppCompatActivity;
  */
 public class StartActivity extends AppCompatActivity {
 
-    boolean isLogged = false;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         Intent intent = new Intent();
 
-        if (!isLogged){
-            intent.setClass(this, LoginActivity.class);
-        }else{
+        if (isLogged()){
             intent.setClass(this, MainActivity.class);
+        }else{
+            intent.setClass(this, LoginActivity.class);
         }
 
         startActivity(intent);
+    }
+
+    private boolean isLogged(){
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        return preferences.getBoolean(LoginActivity.USER_AUTHENTICATED, false);
     }
 }

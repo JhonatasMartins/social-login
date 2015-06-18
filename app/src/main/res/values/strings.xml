@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Social</string>
     <string name="action_settings">Settings</string>
+    <string name="action_logout">Logout</string>
 
     <string name="login_with">Login with</string>
     <string name="login_facebook">Facebook</string>
