@@ -47,14 +47,17 @@ public class LoginActivity extends AppCompatActivity
     }
 
     @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        //disconnect google client api
+        googleAuth.logout();
+    }
+
+    @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode == GoogleAuth.GOOGLE_SIGN_IN){
-            googleAuth.login();
-        }else{
-            facebookAuth.getFacebookCallbackManager().onActivityResult(requestCode, resultCode, data);
-        }
+        facebookAuth.getFacebookCallbackManager().onActivityResult(requestCode, resultCode, data);
     }
 
     @Override

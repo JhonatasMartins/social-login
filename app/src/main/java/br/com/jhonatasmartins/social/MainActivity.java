@@ -60,8 +60,19 @@ public class MainActivity extends AppCompatActivity{
             auth = new FacebookAuth(this, authListener);
         }else{
             auth = new GoogleAuth(this, authListener);
+            auth.login();
         }
 
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        if (auth instanceof GoogleAuth){
+            //disconnect google client api
+            auth.logout();
+        }
     }
 
     @Override
