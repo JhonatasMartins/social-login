@@ -45,7 +45,9 @@ public class GoogleAuth extends Auth
 
     @Override
     public void logout() {
-        googleApiClient.disconnect();
+        if (googleApiClient.isConnected()) {
+            googleApiClient.disconnect();
+        }
     }
 
     @Override
@@ -71,7 +73,7 @@ public class GoogleAuth extends Auth
 
     @Override
     public void onConnectionSuspended(int cause) {
-        //if activity lose connection try it again
+
         googleApiClient.connect();
     }
 
