@@ -2,6 +2,7 @@ package br.com.jhonatasmartins.social;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.design.widget.NavigationView;
@@ -9,6 +10,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -21,7 +25,9 @@ import br.com.jhonatasmartins.social.login.SimpleAuthListener;
 import br.com.jhonatasmartins.social.login.Social;
 
 
-public class MainActivity extends AppCompatActivity{
+public class MainActivity extends AppCompatActivity implements View.OnClickListener{
+
+    final int REQUEST_CODE = 1000;
 
     Toolbar toolbar;
     NavigationView navigationView;
@@ -29,8 +35,13 @@ public class MainActivity extends AppCompatActivity{
     TextView email;
     ImageView cover;
     ImageView photo;
+    EditText shareContent;
+    TextView pickFilename;
+    Button pickFile;
+    Button share;
     Social socialNetwork;
 
+    Uri imageOrVideo;
     Auth auth;
 
     private SimpleAuthListener authListener = new SimpleAuthListener() {
@@ -51,6 +62,13 @@ public class MainActivity extends AppCompatActivity{
         email = (TextView) findViewById(R.id.social_email);
         cover = (ImageView) findViewById(R.id.social_cover);
         photo = (ImageView) findViewById(R.id.social_photo);
+        shareContent = (EditText) findViewById(R.id.social_share_content);
+        pickFilename= (TextView) findViewById(R.id.pick_filename);
+        pickFile = (Button) findViewById(R.id.pick_file);
+        share = (Button) findViewById(R.id.share);
+
+        pickFile.setOnClickListener(this);
+        share.setOnClickListener(this);
 
         setSupportActionBar(toolbar);
         setupUserInfo();
@@ -91,6 +109,37 @@ public class MainActivity extends AppCompatActivity{
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        if (requestCode == REQUEST_CODE && resultCode == RESULT_OK){
+            imageOrVideo = data.getData();
+            pickFilename.setText(imageOrVideo.getPath());
+        }
+    }
+
+    @Override
+    public void onClick(View view) {
+
+        int viewId = view.getId();
+
+        if(viewId == R.id.pick_file){
+            pickFile();
+        }else if(viewId == R.id.share){
+            auth.share(shareContent.getText().toString(), imageOrVideo);
+        }
+
+    }
+
+    private void pickFile(){
+        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+        intent.setType("image/*, video/*");
+
+        if(intent.resolveActivity(getPackageManager()) != null){
+            startActivityForResult(intent, REQUEST_CODE);
+        }
     }
 
     private void setupUserInfo(){

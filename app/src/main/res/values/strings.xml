@@ -6,5 +6,10 @@
     <string name="login_with">Login with</string>
     <string name="login_facebook">Facebook</string>
     <string name="login_google">Google</string>
+    <string name="share">Share</string>
+    <string name="content_share">Content to share</string>
+    <string name="pick_file">Pick a file</string>
 
+    <string name="attachment_much_long">Attachment is much long, max size is 12mb</string>
+    <string name="need_facebook_app">You need native facebook app to perform this action</string>
 </resources>

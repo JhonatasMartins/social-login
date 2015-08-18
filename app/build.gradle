@@ -20,9 +20,13 @@ android {
 }
 
 dependencies {
-    compile 'com.android.support:design:22.2.0'
+    compile 'com.android.support:design:22.2.1'
 
-    compile 'com.facebook.android:facebook-android-sdk:4.1.0'
-    compile 'com.google.android.gms:play-services:6.5.+'
+    compile 'com.facebook.android:facebook-android-sdk:4.5.0'
+    compile 'com.google.android.gms:play-services:7.5.+'
     compile 'com.squareup.picasso:picasso:2.5.2'
 }
+
+//https://developers.facebook.com/docs/sharing/android
+//https://developers.google.com/+/mobile/android/share/
+//https://developers.google.com/+/mobile/android/share/media

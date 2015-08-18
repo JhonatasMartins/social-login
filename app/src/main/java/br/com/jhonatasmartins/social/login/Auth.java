@@ -1,5 +1,7 @@
 package br.com.jhonatasmartins.social.login;
 
+import android.net.Uri;
+
 /**
  * Created by jhonatas on 6/18/15.
  */
@@ -20,6 +22,11 @@ public abstract class Auth {
      * to clear shared preferences, clear activity stack and something else
      */
     public abstract void revoke();
+
+    /**
+     * share text with image or video
+     */
+    public abstract void share(String content, Uri imageOrVideo);
 
     /**
      * you must set onAuthListener to receiver callback events

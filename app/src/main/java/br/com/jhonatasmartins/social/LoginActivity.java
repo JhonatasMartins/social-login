@@ -57,6 +57,16 @@ public class LoginActivity extends AppCompatActivity
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+
+        if(requestCode == GoogleAuth.GOOGLE_SIGN_IN){
+            if(resultCode == RESULT_OK) {
+                //call connect again because google just authorized app
+                googleAuth.login();
+            }else{
+                onLoginCancel();
+            }
+        }
+
         facebookAuth.getFacebookCallbackManager().onActivityResult(requestCode, resultCode, data);
     }
 

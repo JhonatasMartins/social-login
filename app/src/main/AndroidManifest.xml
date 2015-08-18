@@ -3,7 +3,7 @@
     package="br.com.jhonatasmartins.social" >
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="ANDROID.PERMISSION.USE_CREDENTIALS" />
+    <uses-permission android:name="android.permission.USE_CREDENTIALS" />
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
 
     <application
@@ -30,6 +30,10 @@
             android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
             android:theme="@android:style/Theme.Translucent.NoTitleBar"
             android:label="@string/app_name" />
+
+        <provider android:authorities="com.facebook.app.FacebookContentProvider501901813305584"
+            android:name="com.facebook.FacebookContentProvider"
+            android:exported="true"/>
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"

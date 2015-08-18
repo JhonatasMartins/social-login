@@ -1,7 +1,10 @@
 package br.com.jhonatasmartins.social.login;
 
 import android.app.Activity;
+import android.content.ContentResolver;
+import android.content.Intent;
 import android.content.IntentSender;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -10,6 +13,7 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
 import com.google.android.gms.plus.Plus;
+import com.google.android.gms.plus.PlusShare;
 import com.google.android.gms.plus.model.people.Person;
 
 /**
@@ -65,7 +69,29 @@ public class GoogleAuth extends Auth
     }
 
     @Override
+    public void share(String content, Uri imageOrVideo) {
+
+        PlusShare.Builder builder = new PlusShare.Builder(hostActivity)
+                                                 .setText(content);
+
+        if (imageOrVideo != null){
+            ContentResolver contentResolver = hostActivity.getContentResolver();
+            String mimeType = contentResolver.getType(imageOrVideo);
+
+            builder.setType(mimeType)
+                   .addStream(imageOrVideo);
+        }else{
+            builder.setType("text/plain");
+        }
+
+
+
+        hostActivity.startActivityForResult(builder.getIntent(), 0);
+    }
+
+    @Override
     public void onConnected(Bundle bundle) {
+        Log.e("teste", "CONNECTED");
         //get info from profile
         SocialProfile profile = getProfileInfo();
         onAuthListener.onLoginSuccess(profile);
@@ -73,7 +99,6 @@ public class GoogleAuth extends Auth
 
     @Override
     public void onConnectionSuspended(int cause) {
-
         googleApiClient.connect();
     }
 

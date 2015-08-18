@@ -1,9 +1,8 @@
 <android.support.v4.widget.DrawerLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -14,6 +13,60 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize" />
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/social_toolbar"
+            android:padding="@dimen/margin"
+            android:orientation="vertical">
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/social_share_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minLines="2"
+                    android:maxLines="4"
+                    android:hint="@string/content_share"/>
+
+            </android.support.design.widget.TextInputLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/pick_file"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/item_margin"
+                    android:text="@string/pick_file"/>
+
+                <TextView
+                    android:id="@+id/pick_filename"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/item_margin"
+                    android:layout_marginLeft="@dimen/item_margin"
+                    android:singleLine="true"
+                    android:ellipsize="end"/>
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/share"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/item_margin"
+                android:layout_gravity="right"
+                android:text="@string/share"/>
+
+        </LinearLayout>
+
     </RelativeLayout>
 
     <android.support.design.widget.NavigationView
@@ -22,7 +75,6 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         app:menu="@menu/menu_drawer"
-        app:headerLayout="@layout/social_profile"
-        tools:layout_gravity=""/>
+        app:headerLayout="@layout/social_profile" />
 
 </android.support.v4.widget.DrawerLayout>
