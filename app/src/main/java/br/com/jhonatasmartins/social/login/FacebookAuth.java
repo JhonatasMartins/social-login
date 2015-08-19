@@ -170,7 +170,7 @@ public class FacebookAuth extends Auth implements FacebookCallback<LoginResult> 
         profile.name = name;
         profile.email = email;
         profile.cover = cover;
-        profile.network = Social.FACEBOOK;
+        profile.network = SocialProfile.FACEBOOK;
 
         //url to get profile photo /{user-id}/picture?redirect=false
         String path = accessToken.getUserId() + "/picture";

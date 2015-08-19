@@ -13,6 +13,7 @@ import br.com.jhonatasmartins.social.login.Auth;
 import br.com.jhonatasmartins.social.login.FacebookAuth;
 import br.com.jhonatasmartins.social.login.GoogleAuth;
 import br.com.jhonatasmartins.social.login.SocialProfile;
+import br.com.jhonatasmartins.social.login.TwitterAuth;
 
 
 public class LoginActivity extends AppCompatActivity
@@ -27,23 +28,28 @@ public class LoginActivity extends AppCompatActivity
 
     Button facebookButton;
     Button googleButton;
+    Button twitterButton;
 
     GoogleAuth googleAuth;
     FacebookAuth facebookAuth;
+    TwitterAuth twitterAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        facebookButton = (Button)findViewById(R.id.login_facebook);
-        googleButton = (Button)findViewById(R.id.login_google);
+        facebookButton = (Button) findViewById(R.id.login_facebook);
+        googleButton = (Button) findViewById(R.id.login_google);
+        twitterButton = (Button) findViewById(R.id.login_twitter);
 
         facebookButton.setOnClickListener(this);
         googleButton.setOnClickListener(this);
+        twitterButton.setOnClickListener(this);
 
         googleAuth = new GoogleAuth(this, this);
         facebookAuth = new FacebookAuth(this, this);
+        twitterAuth = new TwitterAuth(this, this);
     }
 
     @Override
@@ -67,16 +73,21 @@ public class LoginActivity extends AppCompatActivity
             }
         }
 
+        twitterAuth.getAuthClient().onActivityResult(requestCode, resultCode, data);
         facebookAuth.getFacebookCallbackManager().onActivityResult(requestCode, resultCode, data);
     }
 
     @Override
     public void onClick(View view) {
 
-        if (view.getId() == R.id.login_facebook){
+        int viewId = view.getId();
+
+        if (viewId == R.id.login_facebook){
             facebookAuth.login();
-        }else{
+        }else if(viewId == R.id.login_google){
             googleAuth.login();
+        }else{
+            twitterAuth.login();
         }
 
     }
@@ -108,7 +119,7 @@ public class LoginActivity extends AppCompatActivity
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
         editor.putBoolean(USER_AUTHENTICATED, true);
-        editor.putString(USER_SOCIAL,   profile.getNetwork().name());
+        editor.putString(USER_SOCIAL,   profile.getNetwork());
         editor.putString(PROFILE_NAME,  profile.getName());
         editor.putString(PROFILE_EMAIL, profile.getEmail());
         editor.putString(PROFILE_IMAGE, profile.getImage());

@@ -22,11 +22,14 @@ import br.com.jhonatasmartins.social.login.Auth;
 import br.com.jhonatasmartins.social.login.FacebookAuth;
 import br.com.jhonatasmartins.social.login.GoogleAuth;
 import br.com.jhonatasmartins.social.login.SimpleAuthListener;
-import br.com.jhonatasmartins.social.login.Social;
+import br.com.jhonatasmartins.social.login.SocialProfile;
+import br.com.jhonatasmartins.social.login.TwitterAuth;
 
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
+    static final String DEFAULT_COVER = "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQN9FVv2cnfoEW7pRKDh0OubDnHEG_BCg-jTEzYHzeaO7vIGbNo";
+    static final String DEFAULT_IMAGE = "http://static.squarespace.com/static/523ce201e4b0cd883dbb8bbf/t/53bf2302e4b06e125c374401/1405035267633/profile-icon.png";
     final int REQUEST_CODE = 1000;
 
     Toolbar toolbar;
@@ -39,7 +42,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     TextView pickFilename;
     Button pickFile;
     Button share;
-    Social socialNetwork;
+    String socialNetwork;
 
     Uri imageOrVideo;
     Auth auth;
@@ -74,11 +77,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setupUserInfo();
 
         //create correct auth manager according user account
-        if (socialNetwork == Social.FACEBOOK){
+        if (socialNetwork.equals(SocialProfile.FACEBOOK)){
             auth = new FacebookAuth(this, authListener);
-        }else{
+        } else if(socialNetwork.equals(SocialProfile.GOOGLE)){
             auth = new GoogleAuth(this, authListener);
             auth.login();
+        }else{
+            auth = new TwitterAuth(this, authListener);
         }
 
     }
@@ -147,15 +152,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         String socialNetworkName = preferences.getString(LoginActivity.USER_SOCIAL, null);
-        socialNetwork = Social.valueOf(socialNetworkName);
+        socialNetwork = socialNetworkName;
 
-        name.setText(preferences.getString(LoginActivity.PROFILE_NAME, ""));
+        String profileName =  preferences.getString(LoginActivity.PROFILE_NAME, "");
+
+        if (socialNetwork.equals(SocialProfile.TWITTER)){
+            name.setText("@" + profileName);
+        }else{
+            name.setText(profileName);
+        }
+
         email.setText(preferences.getString(LoginActivity.PROFILE_EMAIL, ""));
 
-        picasso.load(preferences.getString(LoginActivity.PROFILE_COVER, ""))
+        picasso.load(preferences.getString(LoginActivity.PROFILE_COVER, DEFAULT_COVER))
                 .into(cover);
 
-        picasso.load(preferences.getString(LoginActivity.PROFILE_IMAGE, ""))
+        picasso.load(preferences.getString(LoginActivity.PROFILE_IMAGE, DEFAULT_IMAGE))
                 .transform(new RoundedTransformation(getResources()))
                 .into(photo);
     }

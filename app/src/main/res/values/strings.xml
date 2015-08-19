@@ -6,6 +6,7 @@
     <string name="login_with">Login with</string>
     <string name="login_facebook">Facebook</string>
     <string name="login_google">Google</string>
+    <string name="login_twitter">Twitter</string>
     <string name="share">Share</string>
     <string name="content_share">Content to share</string>
     <string name="pick_file">Pick a file</string>

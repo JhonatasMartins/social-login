@@ -5,11 +5,15 @@ package br.com.jhonatasmartins.social.login;
  */
 public class SocialProfile {
 
+    public static final String FACEBOOK = "facebook";
+    public static final String TWITTER = "twitter";
+    public static final String GOOGLE = "google";
+
     String name;
     String email;
     String image;
     String cover;
-    Social network;
+    String network;
 
     public String getName() {
         return name;
@@ -27,7 +31,7 @@ public class SocialProfile {
         return email;
     }
 
-    public Social getNetwork() {
+    public String getNetwork() {
         return network;
     }
 }

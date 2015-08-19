@@ -131,7 +131,7 @@ public class GoogleAuth extends Auth
 
         profile.email = Plus.AccountApi.getAccountName(googleApiClient);
         profile.name = person.getDisplayName();
-        profile.network = Social.GOOGLE;
+        profile.network = SocialProfile.GOOGLE;
 
         if (person.hasCover()){
             Person.Cover cover = person.getCover();

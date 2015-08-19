@@ -27,4 +27,13 @@
         android:textColor="@android:color/white"
         android:background="@drawable/google_button"/>
 
+    <Button
+        android:id="@+id/login_twitter"
+        android:layout_width="@dimen/login_button_width"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/item_margin"
+        android:text="@string/login_twitter"
+        android:textColor="@android:color/white"
+        android:background="@drawable/twitter_button"/>
+
 </LinearLayout>
