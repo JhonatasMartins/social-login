@@ -23,9 +23,9 @@ Some References:
 
 ##### Twitter
 
-[Fabric.io download](https://fabric.io/downloads)
-[Setup fabric.io](http://docs.fabric.io/android/fabric/integration.html)
-[Twitter SDK](http://docs.fabric.io/android/twitter/twitter.html#set-up-kit)
-[Login with Twitter](http://docs.fabric.io/android/twitter/authentication.html#log-in-with-twitter)
-[Share - Tweet Composer](http://docs.fabric.io/android/twitter/compose-tweets.html)
+[Fabric.io download](https://fabric.io/downloads)    
+[Setup fabric.io](http://docs.fabric.io/android/fabric/integration.html)    
+[Twitter SDK](http://docs.fabric.io/android/twitter/twitter.html#set-up-kit)    
+[Login with Twitter](http://docs.fabric.io/android/twitter/authentication.html#log-in-with-twitter)    
+[Share - Tweet Composer](http://docs.fabric.io/android/twitter/compose-tweets.html)    
 
