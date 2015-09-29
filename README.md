@@ -16,9 +16,9 @@ Some References:
 ##### Google Plus
 
 [Setup project](https://developers.google.com/+/mobile/android/getting-started)  
-[Revoke Access](https://developers.google.com/identity/sign-in/android/disconnect)
-[Share](https://developers.google.com/+/mobile/android/share/)
-[Share media](https://developers.google.com/+/mobile/android/share/media)
+[Revoke Access](https://developers.google.com/identity/sign-in/android/disconnect)   
+[Share](https://developers.google.com/+/mobile/android/share/)    
+[Share media](https://developers.google.com/+/mobile/android/share/media)   
 
 
 ##### Twitter
